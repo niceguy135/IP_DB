@@ -11,15 +11,21 @@ CONFIG += c++11
 SOURCES += \
     authentification/login.cpp \
     base/main.cpp \
-    base/mainwindow.cpp
+    base/mainwindow.cpp \
+    selecting/orderswidget.cpp \
+    selecting/rootwidget.cpp
 
 HEADERS += \
     authentification/login.h \
-    base/mainwindow.h
+    base/mainwindow.h \
+    selecting/orderswidget.h \
+    selecting/rootwidget.h
 
 FORMS += \
     authentification/login.ui \
-    base/mainwindow.ui
+    base/mainwindow.ui \
+    selecting/orderswidget.ui \
+    selecting/rootwidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
