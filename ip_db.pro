@@ -12,18 +12,21 @@ SOURCES += \
     authentification/login.cpp \
     base/main.cpp \
     base/mainwindow.cpp \
+    selecting/drinktypewidget.cpp \
     selecting/orderswidget.cpp \
     selecting/rootwidget.cpp
 
 HEADERS += \
     authentification/login.h \
     base/mainwindow.h \
+    selecting/drinktypewidget.h \
     selecting/orderswidget.h \
     selecting/rootwidget.h
 
 FORMS += \
     authentification/login.ui \
     base/mainwindow.ui \
+    selecting/drinktypewidget.ui \
     selecting/orderswidget.ui \
     selecting/rootwidget.ui
 
