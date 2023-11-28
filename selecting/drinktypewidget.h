@@ -20,7 +20,7 @@ private:
 
 private slots:
     void switchToRoot();
-    void getDrinksByType(int drinkTypeInd);
+    void getDrinksByType(int index);
 };
 
 #endif // DRINKTYPEWIDGET_H

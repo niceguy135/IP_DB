@@ -20,8 +20,8 @@ private:
 
 private slots:
     void switchToOrdersList();
-    void exit();
     void createOrder();
+    void exit();
 };
 
 #endif // ROOTWIDGET_H
