@@ -2,7 +2,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++17
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -12,6 +12,8 @@ SOURCES += \
     authentification/login.cpp \
     base/main.cpp \
     base/mainwindow.cpp \
+    base/order.cpp \
+    base/user.cpp \
     selecting/drinktypewidget.cpp \
     selecting/orderswidget.cpp \
     selecting/rootwidget.cpp
@@ -19,6 +21,8 @@ SOURCES += \
 HEADERS += \
     authentification/login.h \
     base/mainwindow.h \
+    base/order.h \
+    base/user.h \
     selecting/drinktypewidget.h \
     selecting/orderswidget.h \
     selecting/rootwidget.h
