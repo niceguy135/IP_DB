@@ -1,4 +1,7 @@
 QT       += core gui
+QT += sql
+
+LIBS += -L/usr/lib/x86_64-linux-gnu/qt5/plugins/sqldrivers -lqsqlpsql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,6 +17,7 @@ SOURCES += \
     base/mainwindow.cpp \
     base/order.cpp \
     base/user.cpp \
+    databaseStuff/sqlservice.cpp \
     selecting/drinktypewidget.cpp \
     selecting/orderswidget.cpp \
     selecting/rootwidget.cpp
@@ -23,6 +27,8 @@ HEADERS += \
     base/mainwindow.h \
     base/order.h \
     base/user.h \
+    databaseStuff/configuratedatabase.h \
+    databaseStuff/sqlservice.h \
     selecting/drinktypewidget.h \
     selecting/orderswidget.h \
     selecting/rootwidget.h
