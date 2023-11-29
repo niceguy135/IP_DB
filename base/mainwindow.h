@@ -11,7 +11,7 @@
 #include "selecting/orderswidget.h"
 #include "selecting/rootwidget.h"
 
-#include <databaseStuff/sqlservice.h>
+#include "databaseStuff/sqlservice.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
