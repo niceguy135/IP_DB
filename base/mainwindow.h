@@ -39,5 +39,8 @@ private:
 
 private slots:
     void setRootWidget();
+    void setLoginWidget();
+    void setDrinkWidget();
+    void setOrdersWidget();
 };
 #endif // MAINWINDOW_H

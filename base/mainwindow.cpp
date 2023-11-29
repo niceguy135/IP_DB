@@ -47,3 +47,18 @@ void MainWindow::initDatabaseInterfaces()
 void MainWindow::setRootWidget(){
     stackedWidget->setCurrentWidget(_rootWidget);
 }
+
+
+void MainWindow::setLoginWidget(){
+    stackedWidget->setCurrentWidget(_login);
+}
+
+
+void MainWindow::setDrinkWidget(){
+    stackedWidget->setCurrentWidget(_drinkTypeWidget);
+}
+
+
+void MainWindow::setOrdersWidget(){
+    stackedWidget->setCurrentWidget(_orderswidget);
+}
