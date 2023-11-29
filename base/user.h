@@ -8,7 +8,7 @@
 class User
 {
 public:
-    static User* GetCurUser();
+    static User* GetCurUser(){return cur_user;};
 
     User(QString, QString, QString, int);
 
