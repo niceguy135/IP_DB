@@ -39,8 +39,11 @@ void MainWindow::initDatabaseInterfaces()
     connect(_login, &login::switchToRoot, this, &MainWindow::setRootWidget);
 
     _drinkTypeWidget = new drinkTypeWidget(nullptr, this->stackedWidget);
+
     _orderswidget = new orderswidget(nullptr, this->stackedWidget);
+
     _rootWidget = new rootWidget(nullptr, this->stackedWidget);
+    connect(_login, &login::switchToRoot, _rootWidget, &rootWidget::updateLabel);
 }
 
 

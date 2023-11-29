@@ -2,16 +2,16 @@
 #define USER_H
 
 #include "QString"
+#include <memory>
 
 #include "order.h"
 
 class User
 {
 public:
-    static User& getUser(QString uuid, QString name, QString surname, int balance) {
-            static User user(uuid, name, surname, balance);
-            return user;
-        }
+    User(QString, QString, QString, int);
+
+    inline static User* curUser;
 
     QString user_id;
     QString name;
@@ -22,9 +22,6 @@ public:
     int getBalance();
 
 private:
-    User(QString, QString, QString, int);
-    User& operator=( User& );
-
     int balance;
 };
 

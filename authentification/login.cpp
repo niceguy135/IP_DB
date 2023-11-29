@@ -36,7 +36,7 @@ void login::loginProcess(){
      } else {
         qDebug() << "Success!";
         sqlQuery.next();
-        User::getUser(sqlQuery.value(0).toString(),
+        User(sqlQuery.value(0).toString(),
                       sqlQuery.value(1).toString(),
                       sqlQuery.value(2).toString(),
                       sqlQuery.value(3).toInt());
