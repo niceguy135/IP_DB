@@ -4,6 +4,7 @@ User::User(QString uuid, QString name, QString surname, int balance)
     : user_id(uuid), name(name), surname(surname)
 {
     this->setBalance(balance);
+    cur_user = this;
 }
 
 

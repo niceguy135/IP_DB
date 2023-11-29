@@ -8,6 +8,8 @@
 class User
 {
 public:
+    static User* GetCurUser();
+
     User(QString, QString, QString, int);
 
     QString user_id;
@@ -19,6 +21,7 @@ public:
     int getBalance();
 
 private:
+    static User* cur_user;
     int balance;
 };
 
