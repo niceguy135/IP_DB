@@ -36,5 +36,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+private slots:
+    void setRootWidget();
 };
 #endif // MAINWINDOW_H

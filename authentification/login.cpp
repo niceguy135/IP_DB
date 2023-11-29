@@ -4,13 +4,13 @@
 #include "base/user.h"
 
 #include <QSqlQuery>
+#include <QDebug>
 
-login::login(QWidget *parent, QStackedWidget* stackPtr) :
+login::login(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::login)
 {
     ui->setupUi(this);
-    curStackedWidget = stackPtr;
 
     connect(ui->loginButton, &QPushButton::clicked, this, &login::loginProcess);
 }
@@ -22,26 +22,25 @@ login::~login()
 
 void login::loginProcess(){
     QSqlQuery sqlQuery;
+    QString query = "SELECT user_id, name, surname, balance FROM users WHERE name = '" +
+            ui->usernameEdit->text() + "' AND surname = '" + ui->surnameEdit->text() + "'";
 
-    sqlQuery.prepare("SELECT user_id, name, surname, balance FROM users "
-                        "WHERE name = :login AND surname = :surname");
+    sqlQuery.exec(query);
 
-    sqlQuery.bindValue(":login", ui->nameLabel->text());
-    sqlQuery.bindValue(":surname", ui->surnameLabel->text());
-
-    sqlQuery.exec();
+    //sqlQuery.exec();
 
     if (sqlQuery.size() == 0) {
         ui->statusLabel->clear();
         ui->statusLabel->setText("Не получилось зарегаться!");
+        qDebug() << "Bad!";
      } else {
-//        fillDiaryMarks(std::move(search_query));
+        qDebug() << "Success!";
         sqlQuery.next();
         User::getUser(sqlQuery.value(0).toString(),
                       sqlQuery.value(1).toString(),
                       sqlQuery.value(2).toString(),
                       sqlQuery.value(3).toInt());
 
-        mainWidget->switchWidget(DrinkWidgets::Root);
+        emit switchToRoot();
      }
 }

@@ -13,12 +13,14 @@ class login : public QWidget
     Q_OBJECT
 
 public:
-    explicit login(QWidget *parent = nullptr, QStackedWidget* stackPtr = nullptr);
+    explicit login(QWidget *parent = nullptr);
     ~login();
+
+signals:
+    void switchToRoot();
 
 private:
     Ui::login *ui;
-    QStackedWidget *curStackedWidget;
 
 private slots:
     void loginProcess();
