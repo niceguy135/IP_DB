@@ -8,9 +8,10 @@
 class User
 {
 public:
-    static User* GetCurUser(){return cur_user;};
-
-    User(QString, QString, QString, int);
+    static User& getUser(QString uuid, QString name, QString surname, int balance) {
+            static User user(uuid, name, surname, balance);
+            return user;
+        }
 
     QString user_id;
     QString name;
@@ -21,7 +22,9 @@ public:
     int getBalance();
 
 private:
-    static User* cur_user;
+    User(QString, QString, QString, int);
+    User& operator=( User& );
+
     int balance;
 };
 
