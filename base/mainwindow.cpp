@@ -7,10 +7,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    initDatabaseInterfaces();
-
     // Stacked widget является скелетом приложения
     stackedWidget = new QStackedWidget();
+
+    initDatabaseInterfaces();
 
     stackedWidget->addWidget(_login);
     stackedWidget->addWidget(_drinkTypeWidget);
@@ -35,8 +35,8 @@ void MainWindow::initDatabaseInterfaces()
     database_unit_->databaseConnect();
 
     // Setting for interfaces
-    _login = new login();
-    _drinkTypeWidget = new drinkTypeWidget();
-    _orderswidget = new orderswidget();
-    _rootWidget = new rootWidget();
+    _login = new login(nullptr, this->stackedWidget);
+    _drinkTypeWidget = new drinkTypeWidget(nullptr, this->stackedWidget);
+    _orderswidget = new orderswidget(nullptr, this->stackedWidget);
+    _rootWidget = new rootWidget(nullptr, this->stackedWidget);
 }
