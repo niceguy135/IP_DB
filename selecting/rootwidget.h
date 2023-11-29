@@ -16,6 +16,9 @@ public:
     explicit rootWidget(QWidget *parent = nullptr, QStackedWidget* stackPtr = nullptr);
     ~rootWidget();
 
+public slots:
+    void updateLabel();
+
 private:
     Ui::rootWidget *ui;
     QStackedWidget *curStackedWidget;
