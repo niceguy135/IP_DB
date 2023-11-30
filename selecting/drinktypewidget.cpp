@@ -1,4 +1,6 @@
 #include <QtGlobal>
+#include <QSqlQuery>
+#include <QDebug>
 
 #include "drinktypewidget.h"
 #include "ui_drinktypewidget.h"
@@ -10,8 +12,7 @@ drinkTypeWidget::drinkTypeWidget(QWidget *parent, User* user) :
     ui->setupUi(this);
     curUser = user;
 
-    connect(ui->pushButton, &QPushButton::clicked, this, &drinkTypeWidget::switchToRoot);
-    connect(ui->comboBox, qOverload<int>(&QComboBox::currentIndexChanged), this, &drinkTypeWidget::getDrinksByType);
+    this->getDrinkTypes();
 }
 
 drinkTypeWidget::~drinkTypeWidget()
@@ -19,12 +20,29 @@ drinkTypeWidget::~drinkTypeWidget()
     delete ui;
 }
 
+void drinkTypeWidget::getDrinkTypes(){
+    QSqlQuery sqlQuery;
+    QString query = "SELECT DISTINCT type FROM products";
+
+    sqlQuery.exec(query);
+
+    if (sqlQuery.size() == 0) {
+        qDebug() << "Неудается получить типы напитков!";
+     } else {
+        while(sqlQuery.next()){
+            qDebug() << sqlQuery.value(0).toString();
+            ui->comboBox->addItem(sqlQuery.value(0).toString());
+        }
+     }
+}
+
+
 void drinkTypeWidget::switchToRoot()
 {
     emit switchToRootWidget();
 }
 
-void drinkTypeWidget::getDrinksByType(int index)
+void drinkTypeWidget::getDrinksByType(QString newDrink)
 {
-
+    qDebug() << newDrink;
 }

@@ -90,23 +90,23 @@
   </connection>
   <connection>
    <sender>comboBox</sender>
-   <signal>currentIndexChanged(int)</signal>
+   <signal>currentTextChanged(QString)</signal>
    <receiver>drinkTypeWidget</receiver>
-   <slot>getDrinksByType(int)</slot>
+   <slot>getDrinksByType(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>743</x>
-     <y>71</y>
+     <x>730</x>
+     <y>76</y>
     </hint>
     <hint type="destinationlabel">
-     <x>754</x>
-     <y>105</y>
+     <x>638</x>
+     <y>27</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
   <slot>switchToRoot()</slot>
-  <slot>getDrinksByType(int)</slot>
+  <slot>getDrinksByType(QString)</slot>
  </slots>
 </ui>

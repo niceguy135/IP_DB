@@ -27,9 +27,11 @@ private:
     Ui::drinkTypeWidget *ui;
     QStackedWidget *curStackedWidget;
 
+    void getDrinkTypes();
+
 private slots:
     void switchToRoot();
-    void getDrinksByType(int index);
+    void getDrinksByType(QString);
 };
 
 #endif // DRINKTYPEWIDGET_H
