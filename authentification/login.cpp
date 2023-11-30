@@ -12,6 +12,10 @@ login::login(QWidget *parent, User* user) :
 
     curUser = user;
 
+    //########DEBUG
+    ui->usernameEdit->setText("Sergey");
+    ui->surnameEdit->setText("Ezhov");
+
     connect(ui->loginButton, &QPushButton::clicked, this, &login::loginProcess);
 }
 
