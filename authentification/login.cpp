@@ -15,8 +15,6 @@ login::login(QWidget *parent, User* user) :
     //########DEBUG
     ui->usernameEdit->setText("Sergey");
     ui->surnameEdit->setText("Ezhov");
-
-    connect(ui->loginButton, &QPushButton::clicked, this, &login::loginProcess);
 }
 
 login::~login()

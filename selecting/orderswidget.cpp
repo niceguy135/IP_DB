@@ -7,8 +7,6 @@ orderswidget::orderswidget(QWidget *parent, User* user) :
 {
     ui->setupUi(this);
     curUser = user;
-
-    connect(ui->pushButton, &QPushButton::clicked, this, &orderswidget::switchToRoot);
 }
 
 orderswidget::~orderswidget()
