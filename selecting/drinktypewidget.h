@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QStackedWidget>
 
+#include "base/user.h"
+
 namespace Ui {
 class drinkTypeWidget;
 }
@@ -13,8 +15,13 @@ class drinkTypeWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit drinkTypeWidget(QWidget *parent = nullptr, QStackedWidget* stackPtr = nullptr);
+    explicit drinkTypeWidget(QWidget *parent = nullptr, User* user = nullptr);
     ~drinkTypeWidget();
+
+    User* curUser;
+
+signals:
+    void switchToRootWidget();
 
 private:
     Ui::drinkTypeWidget *ui;

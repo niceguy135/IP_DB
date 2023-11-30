@@ -1,12 +1,12 @@
 #include "orderswidget.h"
 #include "ui_orderswidget.h"
 
-orderswidget::orderswidget(QWidget *parent, QStackedWidget* stackPtr) :
+orderswidget::orderswidget(QWidget *parent, User* user) :
     QWidget(parent),
     ui(new Ui::orderswidget)
 {
     ui->setupUi(this);
-    curStackedWidget = stackPtr;
+    curUser = user;
 
     connect(ui->pushButton, &QPushButton::clicked, this, &orderswidget::switchToRoot);
 }
@@ -17,5 +17,5 @@ orderswidget::~orderswidget()
 }
 
 void orderswidget::switchToRoot(){
-
+    emit switchToRootWidget();
 }

@@ -38,16 +38,24 @@ void MainWindow::initDatabaseInterfaces()
 
     // Setting for interfaces
     _login = new login(nullptr, curUser);
-    _drinkTypeWidget = new drinkTypeWidget(nullptr, this->stackedWidget);
-    _orderswidget = new orderswidget(nullptr, this->stackedWidget);
+    _drinkTypeWidget = new drinkTypeWidget(nullptr, curUser);
+    _orderswidget = new orderswidget(nullptr, curUser);
     _rootWidget = new rootWidget(nullptr, curUser);
 
+    //сигналы из логина
     connect(_login, &login::switchToRoot, _rootWidget, &rootWidget::updateLabel);
     connect(_login, &login::switchToRoot, this, &MainWindow::setRootWidget);
 
+    //сигналы из рут виджета
     connect(_rootWidget, &rootWidget::switchToLogin, this, &MainWindow::setLoginWidget);
     connect(_rootWidget, &rootWidget::switchToOrders, this, &MainWindow::setOrdersWidget);
     connect(_rootWidget, &rootWidget::switchToDrinks, this, &MainWindow::setDrinkWidget);
+
+    //сигналы из списка заказов
+    connect(_orderswidget, &orderswidget::switchToRootWidget, this, &MainWindow::setRootWidget);
+
+    //сигналы из напитков
+    connect(_drinkTypeWidget, &drinkTypeWidget::switchToRootWidget, this, &MainWindow::setRootWidget);
 }
 
 
