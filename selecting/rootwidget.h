@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QStackedWidget>
 
+#include "base/user.h"
+
 namespace Ui {
 class rootWidget;
 }
@@ -13,8 +15,10 @@ class rootWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit rootWidget(QWidget *parent = nullptr, QStackedWidget* stackPtr = nullptr);
+    explicit rootWidget(QWidget *parent = nullptr, User* user = nullptr);
     ~rootWidget();
+
+    User* curUser;
 
 public slots:
     void updateLabel();

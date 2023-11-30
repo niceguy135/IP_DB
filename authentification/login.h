@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QStackedWidget>
 
+#include "base/user.h"
+
 namespace Ui {
 class login;
 }
@@ -13,8 +15,10 @@ class login : public QWidget
     Q_OBJECT
 
 public:
-    explicit login(QWidget *parent = nullptr);
+    explicit login(QWidget *parent = nullptr, User* user = nullptr);
     ~login();
+
+    User* curUser;
 
 signals:
     void switchToRoot();

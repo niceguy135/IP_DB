@@ -9,9 +9,8 @@
 class User
 {
 public:
+    User();
     User(QString, QString, QString, int);
-
-    inline static User* curUser;
 
     QString user_id;
     QString name;

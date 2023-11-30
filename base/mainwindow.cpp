@@ -34,15 +34,17 @@ void MainWindow::initDatabaseInterfaces()
     database_unit_ = std::make_unique<SqlService>();
     database_unit_->databaseConnect();
 
+    curUser = new User();
+
     // Setting for interfaces
-    _login = new login(nullptr);
+    _login = new login(nullptr, curUser);
     connect(_login, &login::switchToRoot, this, &MainWindow::setRootWidget);
 
     _drinkTypeWidget = new drinkTypeWidget(nullptr, this->stackedWidget);
 
     _orderswidget = new orderswidget(nullptr, this->stackedWidget);
 
-    _rootWidget = new rootWidget(nullptr, this->stackedWidget);
+    _rootWidget = new rootWidget(nullptr, curUser);
     connect(_login, &login::switchToRoot, _rootWidget, &rootWidget::updateLabel);
 }
 

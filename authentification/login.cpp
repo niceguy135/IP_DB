@@ -1,16 +1,16 @@
 #include "login.h"
 #include "ui_login.h"
 
-#include "base/user.h"
-
 #include <QSqlQuery>
 #include <QDebug>
 
-login::login(QWidget *parent) :
+login::login(QWidget *parent, User* user) :
     QWidget(parent),
     ui(new Ui::login)
 {
     ui->setupUi(this);
+
+    curUser = user;
 
     connect(ui->loginButton, &QPushButton::clicked, this, &login::loginProcess);
 }
@@ -36,10 +36,10 @@ void login::loginProcess(){
      } else {
         qDebug() << "Success!";
         sqlQuery.next();
-        User(sqlQuery.value(0).toString(),
-                      sqlQuery.value(1).toString(),
-                      sqlQuery.value(2).toString(),
-                      sqlQuery.value(3).toInt());
+        curUser->user_id = sqlQuery.value(0).toString();
+        curUser->name = sqlQuery.value(1).toString();
+        curUser->surname = sqlQuery.value(2).toString();
+        curUser->setBalance(sqlQuery.value(3).toInt());
 
         emit switchToRoot();
      }

@@ -5,12 +5,12 @@
 
 #include <QDebug>
 
-rootWidget::rootWidget(QWidget *parent, QStackedWidget* stackPtr) :
+rootWidget::rootWidget(QWidget *parent, User* user) :
     QWidget(parent),
     ui(new Ui::rootWidget)
 {
     ui->setupUi(this);
-    curStackedWidget = stackPtr;
+    curUser = user;
 
     connect(ui->createButton, &QPushButton::clicked, this, &rootWidget::createOrder);
     connect(ui->ordersButton, &QPushButton::clicked, this, &rootWidget::switchToOrdersList);
@@ -35,11 +35,6 @@ void rootWidget::exit(){
 }
 
 void rootWidget::updateLabel(){
-    auto curUser = User::curUser;
-
-    qDebug() << curUser->name;
-    qDebug() << curUser->surname;
-
     QString newText = "Здраствуйте, " + curUser->name + " " + curUser->surname;
     ui->label->setText(newText);
 }

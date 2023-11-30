@@ -6,6 +6,8 @@
 #include <QMainWindow>
 #include <QStackedWidget>
 
+#include "base/user.h"
+
 #include "authentification/login.h"
 #include "selecting/drinktypewidget.h"
 #include "selecting/orderswidget.h"
@@ -29,6 +31,8 @@ public:
     drinkTypeWidget* _drinkTypeWidget;
     orderswidget* _orderswidget;
     rootWidget* _rootWidget;
+
+    User* curUser;
 
     QStackedWidget *stackedWidget;
     std::shared_ptr<SqlService> database_unit_;
