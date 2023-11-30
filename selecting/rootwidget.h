@@ -20,6 +20,11 @@ public:
 
     User* curUser;
 
+signals:
+    void switchToLogin();
+    void switchToOrders();
+    void switchToDrinks();
+
 public slots:
     void updateLabel();
 

@@ -38,14 +38,16 @@ void MainWindow::initDatabaseInterfaces()
 
     // Setting for interfaces
     _login = new login(nullptr, curUser);
+    _drinkTypeWidget = new drinkTypeWidget(nullptr, this->stackedWidget);
+    _orderswidget = new orderswidget(nullptr, this->stackedWidget);
+    _rootWidget = new rootWidget(nullptr, curUser);
+
+    connect(_login, &login::switchToRoot, _rootWidget, &rootWidget::updateLabel);
     connect(_login, &login::switchToRoot, this, &MainWindow::setRootWidget);
 
-    _drinkTypeWidget = new drinkTypeWidget(nullptr, this->stackedWidget);
-
-    _orderswidget = new orderswidget(nullptr, this->stackedWidget);
-
-    _rootWidget = new rootWidget(nullptr, curUser);
-    connect(_login, &login::switchToRoot, _rootWidget, &rootWidget::updateLabel);
+    connect(_rootWidget, &rootWidget::switchToLogin, this, &MainWindow::setLoginWidget);
+    connect(_rootWidget, &rootWidget::switchToOrders, this, &MainWindow::setOrdersWidget);
+    connect(_rootWidget, &rootWidget::switchToDrinks, this, &MainWindow::setDrinkWidget);
 }
 
 

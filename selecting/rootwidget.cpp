@@ -23,15 +23,15 @@ rootWidget::~rootWidget()
 }
 
 void rootWidget::switchToOrdersList(){
-
+    emit switchToOrders();
 }
 
 void rootWidget::createOrder(){
-
+    emit switchToDrinks();
 }
 
 void rootWidget::exit(){
-
+    emit switchToLogin();
 }
 
 void rootWidget::updateLabel(){
