@@ -1,7 +1,7 @@
 #ifndef DRINKTYPEWIDGET_H
 #define DRINKTYPEWIDGET_H
 
-#include <QMap>
+#include <map>
 #include <vector>
 
 #include <QWidget>
@@ -30,16 +30,12 @@ private:
     Ui::drinkTypeWidget *ui;
     QStackedWidget *curStackedWidget;
 
-    QMap<int, QString> stores;
-    QMap<int, QString> suppliers;
-
-    QMap<int, std::vector<int>> store_suppliers_relation;
-    QMap<int, std::vector<int>> inventory;
+    std::map<int, QString> stores;
+    std::map<int, QString> suppliers;
 
     void getDrinkTypes();
     void getStores();
     void getSuppliers();
-    void setMaps();
 
 
 private slots:
