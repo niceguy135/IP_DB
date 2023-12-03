@@ -13,36 +13,13 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>40</y>
-     <width>471</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>30</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Выберете тип напитка:</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
-     <x>115</x>
-     <y>131</y>
-     <width>771</width>
-     <height>441</height>
+     <x>65</x>
+     <y>171</y>
+     <width>881</width>
+     <height>401</height>
     </rect>
    </property>
   </widget>
@@ -59,15 +36,97 @@
     <string>Назад</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>610</x>
-     <y>60</y>
-     <width>141</width>
-     <height>28</height>
+     <x>280</x>
+     <y>10</y>
+     <width>451</width>
+     <height>150</height>
     </rect>
    </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="typeLable">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Выберете тип напитка:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="storeLabel">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Выберете магазин:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="storeCombo"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="supplierLabel">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Выберете поставщика:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="supplierCombo"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="applyButton">
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Применить фильтр</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
@@ -89,18 +148,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>comboBox</sender>
-   <signal>currentTextChanged(QString)</signal>
+   <sender>applyButton</sender>
+   <signal>clicked()</signal>
    <receiver>drinkTypeWidget</receiver>
-   <slot>getDrinksByType(QString)</slot>
+   <slot>applyFilters()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>730</x>
-     <y>76</y>
+     <x>374</x>
+     <y>141</y>
     </hint>
     <hint type="destinationlabel">
-     <x>638</x>
-     <y>27</y>
+     <x>123</x>
+     <y>100</y>
     </hint>
    </hints>
   </connection>
@@ -108,5 +167,8 @@
  <slots>
   <slot>switchToRoot()</slot>
   <slot>getDrinksByType(QString)</slot>
+  <slot>getDrinksByStore(QString)</slot>
+  <slot>getDrinksBySupplier(QString)</slot>
+  <slot>applyFilters()</slot>
  </slots>
 </ui>
