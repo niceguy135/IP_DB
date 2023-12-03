@@ -1,5 +1,6 @@
 #include <QtGlobal>
 #include <QSqlQuery>
+#include <QStringList>
 #include <QDebug>
 #include <set>
 
@@ -11,6 +12,21 @@ drinkTypeWidget::drinkTypeWidget(QWidget *parent, User* user) :
     ui(new Ui::drinkTypeWidget)
 {
     ui->setupUi(this);
+
+    QStringList headers = (QStringList() << "Наименование" << "Градус");
+
+    ui->tableWidget->setColumnCount(2); // Указываем число колонок
+    ui->tableWidget->setShowGrid(true); // Включаем сетку
+    // Разрешаем выделение только одного элемента
+    ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+    // Разрешаем выделение построчно
+    ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+    // Устанавливаем заголовки колонок
+    ui->tableWidget->setHorizontalHeaderLabels(headers);
+    // Растягиваем последнюю колонку на всё доступное пространство
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+
+
     curUser = user;
 
     this->getDrinkTypes();
@@ -93,10 +109,10 @@ void drinkTypeWidget::applyFilters()
     QSqlQuery sqlQuery;
 
     //фильтруем магазины по выбранному алкоголю
-    QString query = "select distinct store_id from inventory"
+    QString query = "select distinct store_id from inventory "
             "where product_id IN"
             "("
-                "select product_id from products"
+                "select product_id from products "
                 "where type = '" + ui->comboBox->currentText() + "'"
             ")";
 
@@ -143,7 +159,6 @@ void drinkTypeWidget::applyFilters()
     else
         filteredStores = &matchedStoresBySuppliers;
 
-
     if(ui->storeCombo->currentIndex() != 0){
         int storeID;
 
@@ -162,7 +177,7 @@ void drinkTypeWidget::applyFilters()
     //получаем напитки
     QString subquery;
 
-    subquery = "select product_id from products where store_id IN (";
+    subquery = "select product_id from inventory where store_id IN (";
     if(ui->storeCombo->currentIndex() != 0){
         int storeID = -1;
 
@@ -178,11 +193,11 @@ void drinkTypeWidget::applyFilters()
             subquery += QString::number(elem);
             subquery += " , ";
         }
-        subquery += "-1";
+        subquery += "-2";
     }
     subquery += ")";
 
-    query = "select name, strength from products"
+    query = "select name, strength from products "
             "where product_id IN"
             "(" + subquery + ")";
 
@@ -192,8 +207,13 @@ void drinkTypeWidget::applyFilters()
     if (sqlQuery.size() == 0) {
         qDebug() << "Ничего нет от store_suppliers_relation!";
     } else {
+        ui->tableWidget->setRowCount(0);
+        auto curRow = 0;
         while(sqlQuery.next()){
-            matchedStoresByDrink.insert(sqlQuery.value(0).toInt());
+            ui->tableWidget->insertRow(curRow);
+            ui->tableWidget->setItem(curRow,0, new QTableWidgetItem(sqlQuery.value(0).toString()));
+            ui->tableWidget->setItem(curRow,1, new QTableWidgetItem(sqlQuery.value(1).toString()));
+            curRow++;
         }
     }
 
