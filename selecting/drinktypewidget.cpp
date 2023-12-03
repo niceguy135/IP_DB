@@ -13,9 +13,9 @@ drinkTypeWidget::drinkTypeWidget(QWidget *parent, User* user) :
 {
     ui->setupUi(this);
 
-    QStringList headers = (QStringList() << "Наименование" << "Градус");
+    QStringList headers = (QStringList() << "Наименование" << "Градус" << "Цена");
 
-    ui->tableWidget->setColumnCount(2); // Указываем число колонок
+    ui->tableWidget->setColumnCount(5); // Указываем число колонок
     ui->tableWidget->setShowGrid(true); // Включаем сетку
     // Разрешаем выделение только одного элемента
     ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -23,6 +23,9 @@ drinkTypeWidget::drinkTypeWidget(QWidget *parent, User* user) :
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
     // Устанавливаем заголовки колонок
     ui->tableWidget->setHorizontalHeaderLabels(headers);
+    // Скрываем колонку под номером 3
+    ui->tableWidget->hideColumn(3);
+    ui->tableWidget->hideColumn(4);
     // Растягиваем последнюю колонку на всё доступное пространство
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
 
@@ -168,9 +171,10 @@ void drinkTypeWidget::applyFilters()
                 break;
             }
         }
-        if (auto search = filteredStores->find(storeID); search == filteredStores->end())
+        if (auto search = filteredStores->find(storeID); search == filteredStores->end()) {
             qDebug() << "Отфильтровано, но нужных магазинов не найдено";
             return;
+        }
 
     }
 
@@ -197,9 +201,11 @@ void drinkTypeWidget::applyFilters()
     }
     subquery += ")";
 
-    query = "select name, strength from products "
-            "where product_id IN"
-            "(" + subquery + ")";
+    query = "select name, strength, price, store_id, products.product_id from products inner join inventory "
+            "on products.product_id = inventory.product_id "
+            "where products.product_id IN"
+            "(" + subquery + ")"
+            "and products.type = '" + ui->comboBox->currentText() + "'";
 
 
     sqlQuery.exec(query);
@@ -213,8 +219,43 @@ void drinkTypeWidget::applyFilters()
             ui->tableWidget->insertRow(curRow);
             ui->tableWidget->setItem(curRow,0, new QTableWidgetItem(sqlQuery.value(0).toString()));
             ui->tableWidget->setItem(curRow,1, new QTableWidgetItem(sqlQuery.value(1).toString()));
+            ui->tableWidget->setItem(curRow,2, new QTableWidgetItem(sqlQuery.value(2).toString()));
+            ui->tableWidget->setItem(curRow,3, new QTableWidgetItem(sqlQuery.value(3).toString()));
+            ui->tableWidget->setItem(curRow,4, new QTableWidgetItem(sqlQuery.value(4).toString()));
             curRow++;
         }
     }
+
+}
+
+
+void drinkTypeWidget::addDrinkToOrders(){
+    QItemSelectionModel *select = ui->tableWidget->selectionModel();
+
+    if(!select->hasSelection())
+        return;
+
+    auto selectedDrinkRow  = select->selectedIndexes().at(0).row();
+
+    auto selectedDrinkId = ui->tableWidget->item(selectedDrinkRow, 4)->text();
+    auto selectedDrinkPrice = ui->tableWidget->item(selectedDrinkRow, 2)->text();
+    auto selectedStoreId = ui->tableWidget->item(selectedDrinkRow, 3)->text();
+    auto orderAddress = ui->addressEdit->text();
+    auto orderName = ui->orderNameEdit->text();
+    if(orderName == "")
+        orderName = "Мой заказ";
+
+    QSqlQuery query;
+    query.prepare("insert into orders (user_id, store_id, product_id, price, name, address) "
+                  "values "
+                  "(:user_id, :store_id, :product_id, :price, :name, :address)");
+
+    query.bindValue(":user_id", curUser->user_id.toInt());
+    query.bindValue(":store_id", selectedStoreId.toInt());
+    query.bindValue(":product_id", selectedDrinkId.toInt());
+    query.bindValue(":price", selectedDrinkPrice);
+    query.bindValue(":name", orderName);
+    query.bindValue(":address", orderAddress);
+    query.exec();
 
 }

@@ -10,6 +10,11 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>14</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -17,9 +22,9 @@
    <property name="geometry">
     <rect>
      <x>65</x>
-     <y>171</y>
-     <width>881</width>
-     <height>401</height>
+     <y>201</y>
+     <width>821</width>
+     <height>371</height>
     </rect>
    </property>
   </widget>
@@ -39,10 +44,10 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>280</x>
+     <x>30</x>
      <y>10</y>
      <width>451</width>
-     <height>150</height>
+     <height>156</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -128,6 +133,95 @@
     </item>
    </layout>
   </widget>
+  <widget class="QPushButton" name="addDrinkButton">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>150</y>
+     <width>201</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Заказать</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="statusLabel">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>30</y>
+     <width>231</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Название вашего заказа:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="orderNameEdit">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>60</y>
+     <width>281</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string/>
+   </property>
+   <property name="placeholderText">
+    <string>Мой заказ</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="addressLabel">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>90</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Адрес доставки:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="addressEdit">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>120</y>
+     <width>281</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Мой адрес не дом и не улица</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections>
@@ -163,6 +257,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>addDrinkButton</sender>
+   <signal>clicked()</signal>
+   <receiver>drinkTypeWidget</receiver>
+   <slot>addDrinkToOrders()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>951</x>
+     <y>208</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>950</x>
+     <y>279</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>switchToRoot()</slot>
@@ -170,5 +280,6 @@
   <slot>getDrinksByStore(QString)</slot>
   <slot>getDrinksBySupplier(QString)</slot>
   <slot>applyFilters()</slot>
+  <slot>addDrinkToOrders()</slot>
  </slots>
 </ui>

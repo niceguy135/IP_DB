@@ -41,6 +41,7 @@ private:
 private slots:
     void switchToRoot();
     void applyFilters();
+    void addDrinkToOrders();
 };
 
 #endif // DRINKTYPEWIDGET_H
