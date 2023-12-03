@@ -28,10 +28,13 @@ private:
     QStackedWidget *curStackedWidget;
 
     void getDrinkTypes();
+    void getStores();
+    void getSuppliers();
+
 
 private slots:
     void switchToRoot();
-    void getDrinksByType(QString);
+    void applyFilters();
 };
 
 #endif // DRINKTYPEWIDGET_H
