@@ -30,7 +30,6 @@ void drinkTypeWidget::getDrinkTypes(){
         qDebug() << "Неудается получить типы напитков!";
      } else {
         while(sqlQuery.next()){
-            qDebug() << sqlQuery.value(0).toString();
             ui->comboBox->addItem(sqlQuery.value(0).toString());
         }
      }
@@ -44,5 +43,5 @@ void drinkTypeWidget::switchToRoot()
 
 void drinkTypeWidget::getDrinksByType(QString newDrink)
 {
-    qDebug() << newDrink;
+
 }

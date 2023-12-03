@@ -34,9 +34,7 @@ void login::loginProcess(){
     if (sqlQuery.size() == 0) {
         ui->statusLabel->clear();
         ui->statusLabel->setText("Не получилось зарегаться!");
-        qDebug() << "Bad!";
      } else {
-        qDebug() << "Success!";
         sqlQuery.next();
         curUser->user_id = sqlQuery.value(0).toString();
         curUser->name = sqlQuery.value(1).toString();
