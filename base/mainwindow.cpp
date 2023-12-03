@@ -49,6 +49,7 @@ void MainWindow::initDatabaseInterfaces()
     //сигналы из рут виджета
     connect(_rootWidget, &rootWidget::switchToLogin, this, &MainWindow::setLoginWidget);
     connect(_rootWidget, &rootWidget::switchToOrders, this, &MainWindow::setOrdersWidget);
+    connect(_rootWidget, &rootWidget::switchToOrders, _orderswidget, &orderswidget::updateTable);
     connect(_rootWidget, &rootWidget::switchToDrinks, this, &MainWindow::setDrinkWidget);
 
     //сигналы из списка заказов

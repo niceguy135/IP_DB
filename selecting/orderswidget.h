@@ -20,6 +20,9 @@ public:
 
     User* curUser;
 
+public slots:
+    void updateTable();
+
 signals:
     void switchToRootWidget();
 
