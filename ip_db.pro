@@ -13,6 +13,7 @@ CONFIG += c++20
 
 SOURCES += \
     authentification/login.cpp \
+    base/adminwidget.cpp \
     base/main.cpp \
     base/mainwindow.cpp \
     base/order.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
 
 HEADERS += \
     authentification/login.h \
+    base/adminwidget.h \
     base/mainwindow.h \
     base/order.h \
     base/user.h \
@@ -35,6 +37,7 @@ HEADERS += \
 
 FORMS += \
     authentification/login.ui \
+    base/adminwidget.ui \
     base/mainwindow.ui \
     selecting/drinktypewidget.ui \
     selecting/orderswidget.ui \
