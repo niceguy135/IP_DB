@@ -41,15 +41,19 @@ void adminWidget::executeQuery() {
                 rowCounter++;
 
             }
-        } else
+        } else {
             qDebug() << "Exec bad!";
 
-            ui->tableWidget->setColumnCount(0);
+            ui->tableWidget->setColumnCount(1);
             ui->tableWidget->insertRow(0);
+            ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
             ui->tableWidget->setItem(0, 0, new QTableWidgetItem("Запрос не может быть выполнен!"));
-    } else
+        }
+    } else {
         qDebug() << "Prepare bad!";
-        ui->tableWidget->setColumnCount(0);
+        ui->tableWidget->setColumnCount(1);
         ui->tableWidget->insertRow(0);
+        ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
         ui->tableWidget->setItem(0, 0, new QTableWidgetItem("Запрос невозможно составить!"));
+    }
 }

@@ -7,6 +7,7 @@
 #include <QStackedWidget>
 
 #include "base/user.h"
+#include "base/adminwidget.h"
 
 #include "authentification/login.h"
 #include "selecting/drinktypewidget.h"
@@ -31,6 +32,7 @@ public:
     drinkTypeWidget* _drinkTypeWidget;
     orderswidget* _orderswidget;
     rootWidget* _rootWidget;
+    adminWidget* _admin;
 
     User* curUser;
 
@@ -46,5 +48,6 @@ private slots:
     void setLoginWidget();
     void setDrinkWidget();
     void setOrdersWidget();
+    void setAdminWidget();
 };
 #endif // MAINWINDOW_H

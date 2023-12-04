@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     stackedWidget->addWidget(_drinkTypeWidget);
     stackedWidget->addWidget(_orderswidget);
     stackedWidget->addWidget(_rootWidget);
+    stackedWidget->addWidget(_admin);
 
     stackedWidget->setCurrentWidget(_login);
 
@@ -41,6 +42,7 @@ void MainWindow::initDatabaseInterfaces()
     _drinkTypeWidget = new drinkTypeWidget(nullptr, curUser);
     _orderswidget = new orderswidget(nullptr, curUser);
     _rootWidget = new rootWidget(nullptr, curUser);
+    _admin = new adminWidget();
 
     //сигналы из логина
     connect(_login, &login::switchToRoot, _rootWidget, &rootWidget::updateLabel);
@@ -57,6 +59,8 @@ void MainWindow::initDatabaseInterfaces()
 
     //сигналы из напитков
     connect(_drinkTypeWidget, &drinkTypeWidget::switchToRootWidget, this, &MainWindow::setRootWidget);
+
+    connect(_login, &login::switchToAdmin, this, &MainWindow::setAdminWidget);
 }
 
 
@@ -77,4 +81,8 @@ void MainWindow::setDrinkWidget(){
 
 void MainWindow::setOrdersWidget(){
     stackedWidget->setCurrentWidget(_orderswidget);
+}
+
+void MainWindow::setAdminWidget(){
+    stackedWidget->setCurrentWidget(_admin);
 }

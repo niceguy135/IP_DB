@@ -2,6 +2,7 @@
 #include "ui_login.h"
 
 #include <QSqlQuery>
+#include <QString>
 #include <QDebug>
 
 login::login(QWidget *parent, User* user) :
@@ -24,7 +25,7 @@ login::~login()
 
 void login::loginProcess(){
     QSqlQuery sqlQuery;
-    QString query = "SELECT user_id, name, surname, balance FROM users WHERE name = '" +
+    QString query = "SELECT user_id, name, surname, balance, role FROM users WHERE name = '" +
             ui->usernameEdit->text() + "' AND surname = '" + ui->surnameEdit->text() + "'";
 
     sqlQuery.exec(query);
@@ -41,6 +42,12 @@ void login::loginProcess(){
         curUser->surname = sqlQuery.value(2).toString();
         curUser->setBalance(sqlQuery.value(3).toInt());
 
-        emit switchToRoot();
+        if(sqlQuery.value(4).toString().contains("Администратор", Qt::CaseInsensitive)){
+            curUser->isAdmin = true;
+            emit switchToAdmin();
+        } else {
+            curUser->isAdmin = false;
+            emit switchToRoot();
+        }
      }
 }

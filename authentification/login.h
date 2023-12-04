@@ -22,6 +22,7 @@ public:
 
 signals:
     void switchToRoot();
+    void switchToAdmin();
 
 private:
     Ui::login *ui;
