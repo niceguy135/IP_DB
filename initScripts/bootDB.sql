@@ -69,7 +69,8 @@ CREATE TABLE orders(
 
 CREATE TABLE orders_history(
 	order_history_id SERIAL PRIMARY KEY,
-	
+
+	user_id INTEGER REFERENCES users(user_id),
 	price MONEY NOT NULL,
 	date TIMESTAMP NOT NULL
 );
@@ -88,7 +89,7 @@ CREATE INDEX order_on_user ON orders(user_id);
 CREATE OR REPLACE FUNCTION add_order_history()
 RETURNS TRIGGER AS $$
 BEGIN
-	INSERT INTO orders_history(price, date) VALUES (OLD.price, OLD.date);
+	INSERT INTO orders_history(user_id, price, date) VALUES (OLD.user_id, OLD.price, OLD.date);
 	
 	RETURN OLD;
 END;
