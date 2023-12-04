@@ -48,7 +48,7 @@ void drinkTypeWidget::getDrinkTypes(){
 
     sqlQuery.exec(query);
 
-    if (sqlQuery.size() == 0) {
+    if (sqlQuery.size() <= 0) {
         qDebug() << "Неудается получить типы напитков!";
      } else {
         ui->comboBox->clear();
@@ -65,7 +65,7 @@ void drinkTypeWidget::getSuppliers(){
 
     sqlQuery.exec(query);
 
-    if (sqlQuery.size() == 0) {
+    if (sqlQuery.size() <= 0) {
         qDebug() << "Неудается получить поставщиков!";
      } else {
         ui->supplierCombo->clear();
@@ -85,7 +85,7 @@ void drinkTypeWidget::getStores(){
 
     sqlQuery.exec(query);
 
-    if (sqlQuery.size() == 0) {
+    if (sqlQuery.size() <= 0) {
         qDebug() << "Неудается получить магазины!";
      } else {
         ui->storeCombo->clear();

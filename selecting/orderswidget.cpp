@@ -22,9 +22,9 @@ orderswidget::orderswidget(QWidget *parent, User* user) :
     // Устанавливаем заголовки колонок
     ui->tableWidget->setHorizontalHeaderLabels(headers);
 
-    updateTable();
-
     curUser = user;
+
+    updateTable();
 }
 
 orderswidget::~orderswidget()
@@ -34,13 +34,15 @@ orderswidget::~orderswidget()
 
 void orderswidget::updateTable(){
     QSqlQuery sqlQuery;
-    QString query = "SELECT order_id, orders.name, products.name, price, "
+    sqlQuery.prepare("SELECT order_id, orders.name, products.name, price, "
                         "stores.name, orders.address, date, state "
                     "FROM orders inner join products on orders.product_id = products.product_id "
                     "inner join stores on orders.store_id = stores.store_id "
-                    "order by order_id";
+                    "where user_id = :user_id "
+                    "order by order_id");
 
-    sqlQuery.exec(query);
+    sqlQuery.bindValue(":user_id", curUser->user_id);
+    sqlQuery.exec();
 
     if (sqlQuery.size() <= 0) {
         qDebug() << "Неудается получить типы напитков!";
