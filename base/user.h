@@ -15,7 +15,7 @@ public:
     QString user_id;
     QString name;
     QString surname;
-    Order* cur_order = nullptr;
+    bool isAdmin = false;
 
     void setBalance(int);
     int getBalance();
